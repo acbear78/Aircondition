@@ -16,8 +16,8 @@ char auth[] = "KEY";
 char ssid[] = "WIFI名字";
 char pswd[] = "WIFI密码";
 //
-#include <ir_Samsung.h>  //修改空调型号改这里，比如你的空调是格力，那么使用下面的，并把这个添加注释
-//#include <ir_Gree.h> //左边是格力空调
+//#include <ir_Samsung.h>  //修改空调型号改这里，比如你的空调是格力，那么使用下面的，并把这个添加注释
+#include <ir_Gree.h> //左边是格力空调
 //
 //
 //
@@ -49,7 +49,7 @@ bool oState = false;
 bool hsState = false;
 bool vsState = false;
 bool ecoState = false;//节能
-bool slState = false;//睡眠
+bool slState = true;//睡眠
 uint8_t setLevel;
 uint8_t setTemp;
 void miotLevel(uint8_t level)
@@ -105,7 +105,7 @@ BlinkerButton Button7("BUTTON_7");
 //BlinkerButton Button8("BUTTON_8");
 
  ////以下代码为睡眠模式开关 如果你的空调支持自行取消注释
-//BlinkerButton Button9("BUTTON_9");
+BlinkerButton Button9("BUTTON_9");
 
 //温度APP控制
 void slider1_callback(int32_t value)
@@ -158,7 +158,7 @@ void miotMode(const String & mode, const String & state)
     // anion 负离子
     // heater 辅热功能
     // dryer 干燥功能
-    // sleep 睡眠模式
+     sleep 睡眠模式
     // soft 柔风功能
     // uv UV杀菌
     // unsb un-straight-blowing 防直吹
@@ -369,51 +369,51 @@ void button7_callback(const String & state)
 
 
 //以下代码为睡眠模式开关 如果你的空调支持自行取消注释
-//  BLINKER_LOG("get button state: ", state);
-//    if (state == BLINKER_CMD_ON) {
-//        BLINKER_LOG("Toggle on!");
-//        Button9.icon("icon_1");
-//        Button9.text("睡眠开");
-//        Button9.print("on");   
-//        ac.sleep(on);
-//        ACSEND
-//        BlinkerMIOT.sleep("on");
-//        BlinkerMIOT.print();
-//        slState = true;
-//    }
-//    else if (state == BLINKER_CMD_OFF) {
-//        BLINKER_LOG("Toggle off!");
-//        Button9.icon("icon_1");
-//        Button9.color("#FF0000");
-//        Button9.text("睡眠关");
-//        // Button1.text("Your button name", "describe");
-//        Button9.print("off");
- //       ac.sleep(false);
-//        ACSEND
-//        BlinkerMIOT.sleep("off");
-//        BlinkerMIOT.print();
-//         slState = false;
-//    }
-//}
-//void miotsleepState(const String & state)
-//{
-//    BLINKER_LOG("need set sleep state: ", state);
-//
-//    if (state == BLINKER_CMD_ON) {
-//        ac.sleep(on);
-//        ACSEND
-//        BlinkerMIOT.sleep("on");
-//        BlinkerMIOT.print();
-//        slState = true;
-//    }
-//    else if (state == BLINKER_CMD_OFF) {
-//        ac.sleep(off);
-//        ACSEND
-//        BlinkerMIOT.sleep("off");
-//        BlinkerMIOT.print();
-//        slState = false;
-//    }
-//}
+  BLINKER_LOG("get button state: ", state);
+    if (state == BLINKER_CMD_ON) {
+        BLINKER_LOG("Toggle on!");
+        Button9.icon("icon_1");
+        Button9.text("睡眠开");
+        Button9.print("on");   
+        ac.sleep(on);
+        ACSEND
+        BlinkerMIOT.sleep("on");
+        BlinkerMIOT.print();
+        slState = true;
+    }
+    else if (state == BLINKER_CMD_OFF) {
+        BLINKER_LOG("Toggle off!");
+        Button9.icon("icon_1");
+        Button9.color("#FF0000");
+        Button9.text("睡眠关");
+        // Button1.text("Your button name", "describe");
+        Button9.print("off");
+        ac.sleep(false);
+        ACSEND
+        BlinkerMIOT.sleep("off");
+        BlinkerMIOT.print();
+         slState = false;
+    }
+}
+void miotsleepState(const String & state)
+{
+    BLINKER_LOG("need set sleep state: ", state);
+
+    if (state == BLINKER_CMD_ON) {
+        ac.sleep(on);
+        ACSEND
+        BlinkerMIOT.sleep("on");
+        BlinkerMIOT.print();
+        slState = true;
+    }
+    else if (state == BLINKER_CMD_OFF) {
+        ac.sleep(off);
+        ACSEND
+        BlinkerMIOT.sleep("off");
+        BlinkerMIOT.print();
+        slState = false;
+    }
+}
 
 
 void miotVSwingState(const String & state)
@@ -533,7 +533,7 @@ void setup()
     ////以下代码为节能模式开关 如果你的空调支持自行取消注释
    // Button8.attach(button8_callback);//节能
    // ////以下代码为睡眠模式开关 如果你的空调支持自行取消注释
-   // Button9.attach(button9_callback);//睡眠
+    Button9.attach(button9_callback);//睡眠
     //
     Blinker.begin(auth, ssid, pswd);
     Blinker.attachData(dataRead);
