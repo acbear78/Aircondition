@@ -26,7 +26,7 @@ char pswd[] = "WIFI密码";
 #include <Blinker.h>
 const uint16_t kIrLed = 14;
 
-IRSamsungAc ac(kIrLed);     // Set the GPIO used for sending messages.
+IRGreeAC ac(kIrLed);     // Set the GPIO used for sending messages.
 
 //wifi信号检测
 
@@ -59,19 +59,19 @@ void miotLevel(uint8_t level)
    switch (level)
     {
      case 0:
-     ac.setFan(kSamsungAcFanAuto);
+     ac.setFan(kGreeFanAuto);
      ACSEND
      break;
      case 1:
-     ac.setFan(kSamsungAcFanLow);
+     ac.setFan(kGreeFanLow);
      ACSEND
      break;
       case 2:
-     ac.setFan(kSamsungAcFanMed);
+     ac.setFan(kGreeFanMed);
      ACSEND
      break;
       case 3:
-     ac.setFan(kSamsungAcFanHigh);
+     ac.setFan(kGreeFanHigh);
      ACSEND
      break;
      default:
@@ -272,7 +272,7 @@ void button3_callback(const String & state)
     BLINKER_LOG("get button state: ", state);
     if (state == BLINKER_CMD_BUTTON_TAP) {
         BLINKER_LOG("Toggle on!");
-        ac.setMode(kSamsungAcAuto);
+        ac.setMode(kGreeAuto);
         ACSEND
     }
 }
@@ -282,7 +282,7 @@ void button4_callback(const String & state)
     BLINKER_LOG("get button state: ", state);
     if (state == BLINKER_CMD_BUTTON_TAP) {
         BLINKER_LOG("Toggle on!");  
-        ac.setMode(kSamsungAcCool);
+        ac.setMode(kGreeCool);
         ACSEND
     }
 }
@@ -292,7 +292,7 @@ void button4_callback(const String & state)
     BLINKER_LOG("get button state: ", state);
     if (state == BLINKER_CMD_BUTTON_TAP) {
         BLINKER_LOG("Toggle on!"); 
-        ac.setMode(kSamsungAcDry);
+        ac.setMode(kGreeDry);
         ACSEND
     }
 }
@@ -302,7 +302,7 @@ void button6_callback(const String & state)
     BLINKER_LOG("get button state: ", state);
     if (state == BLINKER_CMD_BUTTON_TAP) {
         BLINKER_LOG("Toggle on!");
-        ac.setMode(kSamsungAcFan);
+        ac.setMode(kGreeFan);
         ACSEND
     }
 }
@@ -312,7 +312,7 @@ void button7_callback(const String & state)
     BLINKER_LOG("get button state: ", state);
     if (state == BLINKER_CMD_BUTTON_TAP) {
         BLINKER_LOG("Toggle on!"); 
-        ac.setMode(kSamsungAcHeat);
+        ac.setMode(kGreeHeat);
         ACSEND
     }
 }  
